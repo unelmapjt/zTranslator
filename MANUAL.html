@@ -400,6 +400,12 @@
         <button class="segmented-btn active" data-lang="ja">🇯🇵 日本語</button>
         <button class="segmented-btn" data-lang="en">🇺🇸 English</button>
       </div>
+
+      <!-- GitHub リポジトリリンク -->
+      <a href="https://github.com/unelmapjt/zTranslator" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: #1e2330; border: 1px solid var(--card-border); border-radius: 8px; color: var(--text-main); font-size: 13px; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.borderColor='#3b82f6'; this.style.color='#60a5fa';" onmouseout="this.style.borderColor='var(--card-border)'; this.style.color='var(--text-main)';">
+        <svg height="15" width="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+        GitHub
+      </a>
     </div>
   </header>
 
@@ -497,10 +503,11 @@
         <div class="step-box" id="quick-step2">
           <div class="step-number">2</div>
           <div class="step-content">
-            <div class="step-title">左リストからMODを選び、翻訳を実行する</div>
-            <p>1. 左側のツリーから翻訳したいMODをクリックします（サブスクライブ済みのMODが自動検出されます）。<br>
+            <div class="step-title">左リストからMODを選び、翻訳を実行する（複数MOD一括対応）</div>
+            <p>1. 左側のツリーから翻訳したいMODをクリックします（<code style="color:#38bdf8;">Ctrl</code> または <code style="color:#38bdf8;">Shift</code> を押しながらクリック、または上部の <strong>［未翻訳のみ］</strong> ボタンで複数のMODをまとめて選択可能）。<br>
             2. 最初は「公式一致（バニラ共通）」テキストが自動で照合されます。<br>
-            3. MOD独自の英語文章もすべて翻訳したい場合は、右上の <strong>［⚙️ 翻訳設定］</strong> を開き、<strong>「🦙 Ollama (ローカルLLM)」</strong> または <strong>「Gemini (API)」</strong> を選択して、画面右下の <strong>［一括AI翻訳を実行］</strong> を押します。</p>
+            3. MOD独自の英語文章もすべて翻訳したい場合は、右上の <strong>［⚙️ 翻訳設定］</strong> を開き、<strong>「🦙 Ollama (ローカルLLM)」</strong> または <strong>「Gemini (API)」</strong> を選択して、画面左下の <strong>［一括AI翻訳を実行］</strong> を押します。<br>
+            4. 選択されたすべてのMODが順番に自動翻訳されます。作業途中で中断したりMODを切り替えても、ドラフトはリアルタイムで自動保存されるため安心です。</p>
           </div>
         </div>
 
@@ -508,8 +515,8 @@
           <div class="step-number">3</div>
           <div class="step-content">
             <div class="step-title">ゲームへ適用してプレイする</div>
-            <p>1. 翻訳が終わったら、画面下の <strong>［ローカルMOD適用 (Zomboid/mods)］</strong> をクリックします。<br>
-            2. <code>C:\Users\&lt;ユーザー名&gt;\Zomboid\mods\&lt;MOD名&gt;_JA</code> に自動インストールされます。<br>
+            <p>1. 翻訳が終わったら、画面中央のエメラルドボタン <strong>［✨ ローカルMOD適用 (Zomboid/mods)］</strong> をクリックします。<br>
+            2. <code>C:\Users\&lt;ユーザー名&gt;\Zomboid\mods\&lt;MOD名&gt;_JA</code> に自動インストールされます（Build 42の全サブバージョンおよびサンドボックスの重複オプションも完全復元して適用されます）。<br>
             3. Project Zomboid を起動し、タイトル画面の <strong>「MOD」</strong> メニューで <strong>「&lt;MOD名&gt;_JA」</strong> にチェックを入れて有効化するだけで完了です！</p>
           </div>
         </div>
@@ -555,10 +562,11 @@
         <div class="step-box" id="quick-step2-en">
           <div class="step-number">2</div>
           <div class="step-content">
-            <div class="step-title">Select Mod & Run Translation</div>
-            <p>1. Click any installed mod on the left mod list.<br>
+            <div class="step-title">Select Mod & Run Translation (Multi-Mod Batch Supported)</div>
+            <p>1. Click any installed mod on the left list (use <code style="color:#38bdf8;">Ctrl</code>/<code style="color:#38bdf8;">Shift</code> or click <strong>［Untranslated Only］</strong> at the top to select multiple mods).<br>
             2. Vanilla-matched strings are matched instantly via the built-in dictionary.<br>
-            3. For custom mod strings, open <strong>［⚙️ Settings］</strong> at the top right, choose <strong>"🦙 Ollama (Local LLM)"</strong> or <strong>"Gemini API"</strong>, then click <strong>［Run Batch AI Translation］</strong>.</p>
+            3. For custom mod strings, open <strong>［⚙️ Settings］</strong> at the top right, choose <strong>"🦙 Ollama (Local LLM)"</strong> or <strong>"Gemini API"</strong>, then click <strong>［Run Batch AI Translation］</strong>.<br>
+            4. All selected mods will be translated sequentially. Progress and drafts are automatically cached in real-time, so you can switch mods or restart the app without losing your work.</p>
           </div>
         </div>
 
@@ -566,8 +574,8 @@
           <div class="step-number">3</div>
           <div class="step-content">
             <div class="step-title">Apply to Game & Play</div>
-            <p>1. Once translated, click <strong>［Apply Mod to Local (Zomboid/mods)］</strong> at the bottom.<br>
-            2. The patch mod is automatically created in <code>Zomboid/mods/&lt;ModID&gt;_JA</code>.<br>
+            <p>1. Once translated, click the centered hero button <strong>［✨ Apply Local MOD (Zomboid/mods)］</strong>.<br>
+            2. The patch mod is automatically created in <code>Zomboid/mods/&lt;ModID&gt;_JA</code> (fully compatible with all Build 42 sub-versions and duplicate sandbox keys).<br>
             3. Start Project Zomboid, navigate to the <strong>"MODS"</strong> menu, and enable your new patch mod!</p>
           </div>
         </div>
