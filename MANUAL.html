@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>zTranzlator - Documentation & User Manual</title>
+  <style>
+    :root {
+      --bg: #0c0e14;
+      --card-bg: #141720;
+      --card-border: #222634;
+      --card-hover: #1b202c;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-glow: rgba(59, 130, 246, 0.25);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --purple: #8b5cf6;
+      --cyan: #06b6d4;
+      --code-bg: #1a1e29;
+      --code-border: #2a3142;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Meiryo UI", "Meiryo", "Segoe UI", -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.75;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 最上部コントロールナビゲーションバー */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14, 17, 24, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-title {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-badge {
+      font-size: 10px;
+      font-weight: 800;
+      background: #0369a1;
+      color: #38bdf8;
+      padding: 2px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* ボタンスイッチ群 */
+    .segmented-control {
+      background: #1e2330;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 3px;
+      display: inline-flex;
+      gap: 2px;
+    }
+
+    .segmented-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .segmented-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .segmented-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+
+    /* レイアウト構造 */
+    .docs-container {
+      display: flex;
+      flex: 1;
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* サイドバー */
+    .docs-sidebar {
+      width: 290px;
+      background: #10131b;
+      border-right: 1px solid var(--card-border);
+      padding: 28px 18px;
+      position: sticky;
+      top: 61px;
+      height: calc(100vh - 61px);
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .sidebar-section-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin: 16px 0 8px 10px;
+    }
+
+    .sidebar-list {
+      list-style: none;
+    }
+
+    .sidebar-item a {
+      display: block;
+      padding: 7px 12px;
+      color: var(--text-sub);
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .sidebar-item a:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateX(3px);
+    }
+
+    /* メインコンテンツエリア */
+    .docs-content {
+      flex: 1;
+      padding: 40px 60px 80px;
+      max-width: 1080px;
+    }
+
+    /* 見出し */
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 36px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin: 24px 0 10px;
+    }
+
+    p {
+      color: var(--text-sub);
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    /* カード・ボックス */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+
+    .card.highlight {
+      border-color: #2563eb;
+      background: linear-gradient(180deg, #161c28 0%, #12151d 100%);
+    }
+
+    .alert {
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      border: 1px solid transparent;
+    }
+
+    .alert-info {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: rgba(56, 189, 248, 0.3);
+      color: #bae6fd;
+    }
+
+    .alert-warning {
+      background: rgba(245, 158, 11, 0.08);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: #fde68a;
+    }
+
+    .alert-success {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: #a7f3d0;
+    }
+
+    /* ステップコンテナ (簡易版用) */
+    .step-box {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    /* テーブル */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    th {
+      background: #191d28;
+      color: #cbd5e1;
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--text-sub);
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* コード・バッジ */
+    code {
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 12px;
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      color: #38bdf8;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      overflow-x: auto;
+      font-size: 13px;
+      color: #e2e8f0;
+      margin: 12px 0 18px;
+      font-family: "Consolas", monospace;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .badge-blue { background: #0e7490; color: #22d3ee; }
+    .badge-green { background: #065f46; color: #34d399; }
+    .badge-red { background: #881337; color: #fb7185; }
+    .badge-purple { background: #581c87; color: #c084fc; }
+    .badge-amber { background: #78350f; color: #fbbf24; }
+
+    /* 表示切り替え用コンテナ */
+    .view-container {
+      display: none;
+    }
+    .view-container.active {
+      display: block;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 900px) {
+      .docs-container { flex-direction: column; }
+      .docs-sidebar { width: 100%; height: auto; position: static; }
+      .docs-content { padding: 24px; }
+      .top-nav { padding: 12px 18px; flex-direction: column; gap: 12px; }
+      .nav-controls { width: 100%; justify-content: space-between; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- トップコントロールバー -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <span class="brand-title">zTranzlator</span>
+      <span class="brand-badge">Build 42 Ready</span>
+      <span style="font-size: 13px; color: var(--text-muted); margin-left: 6px;">| Documentation</span>
+    </div>
+
+    <div class="nav-controls">
+      <!-- 簡易版 / 詳細版 切替 -->
+      <div class="segmented-control" id="mode-switcher">
+        <button class="segmented-btn active" data-mode="quick">
+          <span>⚡</span> <span class="txt-quick-label">簡易版 (Quick)</span>
+        </button>
+        <button class="segmented-btn" data-mode="detailed">
+          <span>📚</span> <span class="txt-detail-label">詳細版 (Detailed)</span>
+        </button>
+      </div>
+
+      <!-- 言語切替 -->
+      <div class="segmented-control" id="lang-switcher">
+        <button class="segmented-btn active" data-lang="ja">🇯🇵 日本語</button>
+        <button class="segmented-btn" data-lang="en">🇺🇸 English</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="docs-container">
+
+    <!-- サイドバー目次 (動的生成/切替) -->
+    <aside class="docs-sidebar">
+      <div id="sidebar-quick-ja" class="sidebar-nav-block">
+        <div class="sidebar-section-title">⚡ 3ステップ最短ガイド</div>
+        <ul class="sidebar-list">
+          <li class="sidebar-item"><a href="#quick-prereq-ja">事前準備 (Python / Ollama)</a></li>
+          <li class="sidebar-item"><a href="#quick-step1">Step 1: 起動と準備</a></li>
+          <li class="sidebar-item"><a href="#quick-step2">Step 2: MOD選択と自動翻訳</a></li>
+          <li class="sidebar-item"><a href="#quick-step3">Step 3: ゲームへ即時適用</a></li>
+          <li class="sidebar-item"><a href="#quick-safe">安心設計 (完全非破壊)</a></li>
+        </ul>
+      </div>
+
+      <div id="sidebar-quick-en" class="sidebar-nav-block" style="display:none;">
+        <div class="sidebar-section-title">⚡ 3-Step Quick Guide</div>
+        <ul class="sidebar-list">
+          <li class="sidebar-item"><a href="#quick-prereq-en">Prerequisites (Python / Ollama)</a></li>
+          <li class="sidebar-item"><a href="#quick-step1-en">Step 1: Launch App</a></li>
+          <li class="sidebar-item"><a href="#quick-step2-en">Step 2: Select & Translate</a></li>
+          <li class="sidebar-item"><a href="#quick-step3-en">Step 3: Apply to Game</a></li>
+          <li class="sidebar-item"><a href="#quick-safe-en">Safe & Non-Destructive</a></li>
+        </ul>
+      </div>
+
+      <div id="sidebar-detailed-ja" class="sidebar-nav-block" style="display:none;">
+        <div class="sidebar-section-title">📚 詳細リファレンス</div>
+        <ul class="sidebar-list">
+          <li class="sidebar-item"><a href="#detail-setup">1. 環境構築 (Python & Ollama 導入手順)</a></li>
+          <li class="sidebar-item"><a href="#detail-philosophy">2. 基本理念とアーキテクチャ</a></li>
+          <li class="sidebar-item"><a href="#detail-folder-struct">3. 元MODフォルダ構造の継承と反映</a></li>
+          <li class="sidebar-item"><a href="#detail-ai-engine">4. 推奨モデル一覧 ＆ API設定</a></li>
+          <li class="sidebar-item"><a href="#detail-grid-tools">5. 検索・ソート・編集機能</a></li>
+          <li class="sidebar-item"><a href="#detail-telemetry">6. CPU/RAM/GPU/VRAM モニター</a></li>
+          <li class="sidebar-item"><a href="#detail-update">7. MODの差分更新・継承</a></li>
+          <li class="sidebar-item"><a href="#detail-export">8. 配布ZIP ＆ ワークショップ公開</a></li>
+          <li class="sidebar-item"><a href="#detail-faq">9. よくある質問 (FAQ)</a></li>
+        </ul>
+      </div>
+
+      <div id="sidebar-detailed-en" class="sidebar-nav-block" style="display:none;">
+        <div class="sidebar-section-title">📚 Detailed Manual</div>
+        <ul class="sidebar-list">
+          <li class="sidebar-item"><a href="#detail-setup-en">1. Setup (Python & Ollama Installation)</a></li>
+          <li class="sidebar-item"><a href="#detail-philosophy-en">2. Concept & Architecture</a></li>
+          <li class="sidebar-item"><a href="#detail-folder-struct-en">3. Folder Structure Inheritance</a></li>
+          <li class="sidebar-item"><a href="#detail-ai-engine-en">4. Recommended Models & Cloud APIs</a></li>
+          <li class="sidebar-item"><a href="#detail-grid-tools-en">5. Search, Sort & Manual Edit</a></li>
+          <li class="sidebar-item"><a href="#detail-telemetry-en">6. Resource Monitor (CPU/RAM/GPU/VRAM)</a></li>
+          <li class="sidebar-item"><a href="#detail-update-en">7. Diff Update & Safe Inheritance</a></li>
+          <li class="sidebar-item"><a href="#detail-export-en">8. Workshop Release & Export ZIP</a></li>
+          <li class="sidebar-item"><a href="#detail-faq-en">9. FAQ & Troubleshooting</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- メインコンテンツ -->
+    <main class="docs-content">
+
+      <!-- ======================================================== -->
+      <!-- 1. 簡易版 (Quick) - 日本語 (JA) -->
+      <!-- ======================================================== -->
+      <section id="view-quick-ja" class="view-container active">
+        <h1>⚡ 3ステップ最短ガイド (日本語)</h1>
+        <p>「難しい設定は後回しにして、とにかく今すぐMODを日本語で遊びたい！」という方のためのクイックマニュアルです。</p>
+
+        <div class="alert alert-success">
+          <div>
+            <strong>💡 完全非破壊パッチ方式:</strong>
+            元MODのファイルを1文字も書き換えません。連動する独立パッチMOD（<code>require</code> 形式）を作成するため、安心していつでも試せます。
+          </div>
+        </div>
+
+        <div class="card" id="quick-prereq-ja" style="border-left: 4px solid var(--accent); margin-bottom: 24px;">
+          <h3 style="margin-top:0;">📋 事前準備チェック（初回のみ）</h3>
+          <p style="font-size: 13px; margin-bottom: 6px;">
+            1. <strong>Python 3.10以上:</strong> インストール時に一番下の <code style="color:#fbbf24;">Add python.exe to PATH</code> に必ずチェックを入れておいてください（忘れるとbatが起動しません）。<br>
+            2. <strong>Ollama (推奨):</strong> <a href="https://ollama.com" target="_blank" style="color:#38bdf8;">ollama.com</a> からインストールしておくと、アプリ起動後に1クリックで推奨AIモデル（<code>gemma4:e4b</code>）をダウンロードして完全無料・無制限のAI翻訳ができます。
+          </p>
+        </div>
+
+        <div class="step-box" id="quick-step1">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <div class="step-title">アプリを起動する</div>
+            <p>MODフォルダ内の <code>run_zTranzlator.bat</code> をダブルクリックします。<br>
+            必要なライブラリが自動チェックされ、ダーク調のモダンUIが起動します。</p>
+          </div>
+        </div>
+
+        <div class="step-box" id="quick-step2">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <div class="step-title">左リストからMODを選び、翻訳を実行する</div>
+            <p>1. 左側のツリーから翻訳したいMODをクリックします（サブスクライブ済みのMODが自動検出されます）。<br>
+            2. 最初は「公式一致（バニラ共通）」テキストが自動で照合されます。<br>
+            3. MOD独自の英語文章もすべて翻訳したい場合は、右上の <strong>［⚙️ 翻訳設定］</strong> を開き、<strong>「🦙 Ollama (ローカルLLM)」</strong> または <strong>「Gemini (API)」</strong> を選択して、画面右下の <strong>［一括AI翻訳を実行］</strong> を押します。</p>
+          </div>
+        </div>
+
+        <div class="step-box" id="quick-step3">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <div class="step-title">ゲームへ適用してプレイする</div>
+            <p>1. 翻訳が終わったら、画面下の <strong>［ローカルMOD適用 (Zomboid/mods)］</strong> をクリックします。<br>
+            2. <code>C:\Users\&lt;ユーザー名&gt;\Zomboid\mods\&lt;MOD名&gt;_JA</code> に自動インストールされます。<br>
+            3. Project Zomboid を起動し、タイトル画面の <strong>「MOD」</strong> メニューで <strong>「&lt;MOD名&gt;_JA」</strong> にチェックを入れて有効化するだけで完了です！</p>
+          </div>
+        </div>
+
+        <div class="card" id="quick-safe">
+          <h3>🎮 ゲーム内オプションで日/英を即座に切り替え可能</h3>
+          <p>ゲーム内の「オプション」➡「Mod設定 (Mod Options)」を開くと、MODごとに日本語と英語を切り替えるトグルスイッチが用意されています。ゲームを再起動せずに言語を戻すことも可能です。</p>
+          <p style="margin-bottom:0;">※ より詳細な設定、元MODフォルダ構造の継承仕様、Ollamaモデルの選び方、Steamワークショップ配布方法などは、上部の <strong>［📚 詳細版］</strong> タブをご覧ください。</p>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- 2. 簡易版 (Quick) - English (EN) -->
+      <!-- ======================================================== -->
+      <section id="view-quick-en" class="view-container">
+        <h1>⚡ 3-Step Quick Start Guide (English)</h1>
+        <p>A fast track guide to translate and enjoy your Project Zomboid Build 42 mods immediately without complicated setup.</p>
+
+        <div class="alert alert-success">
+          <div>
+            <strong>💡 Zero-Destruction Architecture:</strong>
+            Never modifies original mod files. Creates an independent companion patch (<code>require</code> dependency). Safe to test and remove anytime.
+          </div>
+        </div>
+
+        <div class="card" id="quick-prereq-en" style="border-left: 4px solid var(--accent); margin-bottom: 24px;">
+          <h3 style="margin-top:0;">📋 Prerequisites Checklist (First-time only)</h3>
+          <p style="font-size: 13px; margin-bottom: 6px;">
+            1. <strong>Python 3.10+:</strong> Ensure <code style="color:#fbbf24;">Add python.exe to PATH</code> was checked during installation (required for the batch launcher).<br>
+            2. <strong>Ollama (Recommended):</strong> Install from <a href="https://ollama.com" target="_blank" style="color:#38bdf8;">ollama.com</a> to enable 100% free, offline, unlimited AI translation using recommended models like <code>gemma4:e4b</code>.
+          </p>
+        </div>
+
+        <div class="step-box" id="quick-step1-en">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <div class="step-title">Launch the Application</div>
+            <p>Double-click <code>run_zTranzlator.bat</code> inside the tool folder.<br>
+            Required dependencies will be verified and the modern desktop interface will launch.</p>
+          </div>
+        </div>
+
+        <div class="step-box" id="quick-step2-en">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <div class="step-title">Select Mod & Run Translation</div>
+            <p>1. Click any installed mod on the left mod list.<br>
+            2. Vanilla-matched strings are matched instantly via the built-in dictionary.<br>
+            3. For custom mod strings, open <strong>［⚙️ Settings］</strong> at the top right, choose <strong>"🦙 Ollama (Local LLM)"</strong> or <strong>"Gemini API"</strong>, then click <strong>［Run Batch AI Translation］</strong>.</p>
+          </div>
+        </div>
+
+        <div class="step-box" id="quick-step3-en">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <div class="step-title">Apply to Game & Play</div>
+            <p>1. Once translated, click <strong>［Apply Mod to Local (Zomboid/mods)］</strong> at the bottom.<br>
+            2. The patch mod is automatically created in <code>Zomboid/mods/&lt;ModID&gt;_JA</code>.<br>
+            3. Start Project Zomboid, navigate to the <strong>"MODS"</strong> menu, and enable your new patch mod!</p>
+          </div>
+        </div>
+
+        <div class="card" id="quick-safe-en">
+          <h3>🎮 In-Game Language Toggle (ModOptions)</h3>
+          <p>Under game Options ➡ Mod Options, you will find quick toggle checkboxes to switch between the translated patch and original English without restarting the game.</p>
+          <p style="margin-bottom:0;">※ For technical details, directory structure inheritance, Ollama models, and Workshop distribution, click the <strong>［📚 Detailed］</strong> tab above.</p>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- 3. 詳細版 (Detailed) - 日本語 (JA) -->
+      <!-- ======================================================== -->
+      <section id="view-detailed-ja" class="view-container">
+        <h1>📚 詳細リファレンスマニュアル (日本語)</h1>
+        <p>zTranzlator の内部アーキテクチャ、ファイル反映の仕組み、ローカルLLM設定、リソース監視、ワークショップ配布に関する完全ガイドです。</p>
+
+        <!-- 1. 環境構築ガイド -->
+        <h2 id="detail-setup">1. 環境構築ガイド (Python ＆ Ollama の導入手順)</h2>
+        <div class="card">
+          <h3>Step 1: Python 3.10+ のインストール</h3>
+          <p>zTranzlator は Python で動作するオープンソースツールです。PCにまだ Python がインストールされていない場合は、以下の手順で導入してください：</p>
+          <ol style="margin-left: 20px; color: var(--text-sub); font-size: 13.5px; line-height: 1.7;">
+            <li><a href="https://www.python.org/downloads/" target="_blank" style="color:var(--accent-color); font-weight:600;">Python 公式ダウンロードページ (python.org)</a> から最新の Windows インストーラーをダウンロードします。</li>
+            <li>インストーラーをダブルクリックして起動します。</li>
+            <li>
+              <div class="alert alert-warning" style="margin: 8px 0;">
+                <div>
+                  <strong>⚠️ 超重要（ここを忘れると起動しません）:</strong><br>
+                  インストーラー最下部にある <strong>「Add python.exe to PATH」（PATHを通す）に必ずチェック</strong> を入れてください。<br>
+                  ※チェックを入れずに進めると、batファイル起動時に「'python' はコマンドとして認識されていません」と表示されてしまいます。
+                </div>
+              </div>
+            </li>
+            <li><strong>［Install Now］</strong> をクリックして完了を待ちます。</li>
+            <li><strong>ライブラリの自動セットアップ:</strong> zTranzlator フォルダ内の <code>run_zTranzlator.bat</code> をダブルクリックするだけで、初回起動時に必要なモジュール（GUIライブラリ、通信モジュール等）が全自動で安全にダウンロード＆インストールされます。</li>
+          </ol>
+
+          <h3 style="margin-top: 24px;">Step 2: Ollama の導入 (ローカルLLM実行基盤)</h3>
+          <p>ローカルAIによる完全無料・無制限・通信不要の翻訳を行うエンジンです：</p>
+          <ol style="margin-left: 20px; color: var(--text-sub); font-size: 13.5px; line-height: 1.7;">
+            <li><a href="https://ollama.com/download" target="_blank" style="color:var(--accent-color); font-weight:600;">Ollama 公式サイト (ollama.com)</a> から Windows 版をダウンロードしてインストールします。</li>
+            <li>インストール後、Windows のタスクバー通知領域（右下のインジケーター）に <strong>アルパカ（ラマ）のアイコン</strong> が常駐していればセットアップ完了です（PC起動時に自動でバックグラウンド待機します）。</li>
+          </ol>
+
+          <h3 style="margin-top: 24px;">Step 3: AI翻訳モデルのダウンロード (2通りの方法)</h3>
+          <p>翻訳を実行するには、Ollama 内に翻訳用のAIモデル（重みデータ）を取得しておく必要があります：</p>
+          
+          <div style="margin-top: 10px;">
+            <strong style="color:#60a5fa;">【方法A: zTranzlator の画面から1クリック (推奨・一番簡単)】</strong>
+            <p style="margin-top: 4px; font-size: 13px;">zTranzlator を起動した際に出る「クイックスタート」画面（または上部「設定」➡「モデルのダウンロード」）で、推奨モデル（<strong><code>gemma4:e4b</code></strong>）を入力してダウンロードボタンを押すだけで、自動取得されます。</p>
+          </div>
+
+          <div style="margin-top: 14px;">
+            <strong style="color:#60a5fa;">【方法B: コマンドプロンプト / PowerShell から直接取得】</strong>
+            <p style="margin-top: 4px; font-size: 13px;">Windowsのスタートメニューから「PowerShell」または「コマンドプロンプト」を開き、以下のコマンドを入力して Enter を押します：</p>
+            <div style="background:#0f172a; padding:10px 14px; border-radius:6px; font-family:var(--font-mono); font-size:13px; color:#38bdf8; margin: 8px 0;">
+              ollama run gemma4:e4b
+            </div>
+            <p style="font-size: 12px; color:var(--text-muted);">※約6.1GBのダウンロードが行われ、完了すると対話プロンプトが出ます。確認後は <code>/bye</code> と打つかウィンドウを閉じて構いません。<br>※超低スペック環境でお試しする場合は <code>ollama run qwen2.5:3b</code> も利用可能です。</p>
+          </div>
+
+          <h3 style="margin-top: 24px;">Step 4: Google Gemini API の設定 (任意・クラウドAIを利用する場合)</h3>
+          <p>ローカルGPUを搭載していないノートPCや、より高速な翻訳を行いたい場合は Google Gemini（クラウドAPI）も利用できます：</p>
+          <ul style="margin-left: 20px; color: var(--text-sub); font-size: 13.5px; line-height: 1.7;">
+            <li><a href="https://aistudio.google.com/" target="_blank" style="color:var(--accent-color); font-weight:600;">Google AI Studio (aistudio.google.com)</a> にGoogleアカウントでログインし、<strong>［Get API key］</strong> から無料のAPIキーを取得します。</li>
+            <li>zTranzlator のエンジン選択で「Google Gemini」を選び、キーを入力して「保存」するだけで即座にクラウド翻訳が有効になります。</li>
+          </ul>
+        </div>
+
+        <!-- 2. 基本理念 -->
+        <h2 id="detail-philosophy">2. 基本理念とアーキテクチャ</h2>
+        <div class="card">
+          <h3>Skyrim「xTranslator」に着想を得た完全非破壊・差分更新設計</h3>
+          <p>従来のゲーム翻訳では、元MODのファイルを直接上書き改造して日本語化することが一般的でした。しかしこの方法では、<strong>元MODがアップデートされた瞬間に翻訳が消滅したり、コードの改変によってゲームがクラッシュするリスク</strong>がありました。</p>
+          <p>zTranzlator は、Project Zomboid Build 42 の公式MOD依存機構（<code>require=&lt;MOD_ID&gt;</code>）を徹底活用し、<strong>元MODのファイルには1文字も触れずに連動パッチを出力</strong>します。ゲームは元MODを先に読み込み、その直後にパッチMODをオーバーレイとして適用します。</p>
+        </div>
+
+        <!-- 2. フォルダ構造と反映の仕組み -->
+        <h2 id="detail-folder-struct">3. 元MODのフォルダ構造の継承と反映の仕組み</h2>
+        <div class="card highlight">
+          <h3 style="color:#60a5fa;">「元のフォルダ構造はちゃんと継承されるのか？」への回答</h3>
+          <p><strong>はい、元MODの階層構造を100%忠実に継承し、Project Zomboid Build 42 の読み込み仕様に合わせて最適出力されます。</strong></p>
+          <p>MOD内のテキストはデータ形式によって保存場所が異なりますが、zTranzlator は以下の<strong>3大アーキテクチャを全自動判別</strong>して適切なディレクトリに配置します：</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>アーキテクチャ</th>
+                <th>元MODでの保存場所</th>
+                <th>パッチMODでの出力階層</th>
+                <th>反映・動作の仕組み</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Type A<br>(公式Translate)</strong></td>
+                <td><code>media/lua/shared/Translate/EN/...</code><br>または <code>42/media/.../EN/...</code></td>
+                <td><code>42/media/lua/shared/Translate/JP/*.json</code><br><code>42/media/lua/shared/Translate/JA/*.json</code><br>（ルート <code>media/</code> にも完全ミラー）</td>
+                <td>B42公式の多言語ローダーが、日本語環境（<code>JP</code>/<code>JA</code>）のJSONを最優先で読み込み、元MODの英語を自動置換します。</td>
+              </tr>
+              <tr>
+                <td><strong>Type B<br>(メディア文書)</strong></td>
+                <td><code>media/textures/printMedia/txt/*.txt</code><br>（The Ark 新聞・手紙・メモ等）</td>
+                <td><code>42/media/textures/printMedia/txt/*.txt</code><br><strong>元MODのサブフォルダ階層を完全継承</strong></td>
+                <td>PZの仮想ファイルシステム（VFS）により、同名・同相対パスのファイルが元MODの文書を非破壊で上書き表示します。</td>
+              </tr>
+              <tr>
+                <td><strong>Type C<br>(ハードコードLua)</strong></td>
+                <td><code>media/lua/client/*.lua</code> 内の生テキスト<br>（UIボタン、ContextMenu、設定項目等）</td>
+                <td><code>media/lua/client/zTranz_Hook_〇〇.lua</code><br><code>media/lua/shared/Translate/JP/UI.json</code></td>
+                <td><strong>元Luaファイルを直接書き換えるとMOD更新で破損する</strong>ため、軽量なフックLuaと純粋ASCIIキーを用いて、<code>getText()</code> 呼び出し時に日本語を注入します。文字化け（CP932/UTF-8問題）も完全回避されます。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 3. AIエンジン -->
+        <h2 id="detail-ai-engine">4. 推奨モデル一覧 ＆ クラウドAPI設定</h2>
+        <div class="card">
+          <h3>RTX 3050〜4070環境に最適な推奨モデル</h3>
+          <p>zTranzlator はローカルPC上で完全無料で動く「Ollama」にネイティブ対応しています。通信料もAPI費用も一切かかりません。</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>モデル名</th>
+                <th>必要VRAM</th>
+                <th>推奨グラフィックボード</th>
+                <th>特徴・翻訳精度</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color:#38bdf8;">gemma4:e4b</strong><br>（RTX3050実機・超推奨）</td>
+                <td>約 6.1 GB</td>
+                <td>RTX 3050 8GB / 3060 / 4060</td>
+                <td>1行あたり <strong>約0.14秒</strong> の爆速推論。思考モードの無駄な待機がなく、「主武装を装備」「ヘッドライトを点灯」など日本のゲームUIとして極めて洗練された日本語を出力します。</td>
+              </tr>
+              <tr>
+                <td><strong style="color:#60a5fa;">qwen2.5:7b</strong><br>（高精度標準）</td>
+                <td>約 5.5 GB</td>
+                <td>RTX 3060 / 3050 8GB / 4060 / 4070</td>
+                <td>自然な文脈理解と専門用語対訳が優秀。ストーリーや台詞MODのニュアンス表現に強い定番モデル。</td>
+              </tr>
+              <tr>
+                <td><strong>qwen2.5:3b</strong><br>（超軽量版・お試し用）</td>
+                <td>約 2.5 GB</td>
+                <td>VRAM 4GB以下のノートPC</td>
+                <td>動作は最速（0.06秒）ですが、パラメータ数が小さいため「装填主武器」のような直訳・カタコトや意図と異なる訳になりやすく、MOD翻訳の実用には手修正が多く必要になります。</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="alert alert-warning">
+            <div>
+              <strong>⚠️ ローカルLLMご利用時の注意点:</strong><br>
+              ローカルAIの翻訳精度はモデル規模に依存します。3Bなどの小型モデルでは稀に誤訳やニュアンスの違いが生じる場合があります。気になる箇所はテーブル行をダブルクリックして手動修正してください。
+            </div>
+          </div>
+
+          <h3 style="margin-top: 24px;">🔄 モデルの更新 ＆ Ollama 本体のアップデート方法</h3>
+          <p>Ollama やダウンロード済みモデルは、以下の簡単な手順で最新状態に保守できます：</p>
+          <ul style="margin-left: 20px; color: var(--text-sub); font-size: 13.5px; line-height: 1.7;">
+            <li><strong>Ollama 本体の更新:</strong> 新バージョンが公開されると、タスクバー右下の通知領域（ラマアイコン）にポップアップ通知が出ます。クリックして再起動するだけで自動更新されます（または公式サイトから最新版インストーラーを上書き実行しても、ダウンロード済みモデルや設定はすべて消えずに保持されます）。</li>
+            <li><strong>AIモデルの最新版への更新:</strong> ターミナルで <code>ollama pull &lt;モデル名&gt;</code>（例: <code>ollama pull gemma4:e4b</code>）を実行すると、更新がある場合のみ差分がダウンロードされて最新版に上書き更新されます（zTranzlator の「設定」➡「直接DL」を押しても同様に最新化されます）。</li>
+            <li><strong>使わなくなったモデルの削除（空き容量確保）:</strong> コマンドプロンプト等で <code>ollama rm &lt;モデル名&gt;</code>（例: <code>ollama rm qwen3.5:9b</code>）と打つだけで、数GB〜十数GBのストレージ容量を即座に解放できます。</li>
+          </ul>
+        </div>
+
+        <!-- 4. 検索・ソート・編集 -->
+        <h2 id="detail-grid-tools">5. 検索・ソート・手動編集ツール</h2>
+        <div class="card">
+          <h3>MOD内リアルタイム検索バー ＆ 絞り込みドロップダウン</h3>
+          <p>翻訳テーブルのすぐ上に設置されたツールバーで、大量のテキストを即座に探せます：</p>
+          <ul style="margin-left: 20px; color: var(--text-sub); font-size: 13px;">
+            <li><strong>🔍 横断検索:</strong> 原文、訳文、タイプ（公式JSON/Lua/printMedia）、ステータス（公式一致/未翻訳/AI翻訳/⚠️）、出現ファイル名、内部キーをリアルタイムに検索。</li>
+            <li><strong>絞り込みフィルター:</strong> 「未翻訳のみ」「AI翻訳・手動のみ」「公式一致・継承のみ」「⚠️幅注意のみ」などをワンクリックで切り替え。</li>
+            <li><strong>上部ヘッダー列クリックによる並べ替え（ソート）:</strong> 原文、訳文、タイプ、ステータス、ファイル名の各ヘッダーをクリックすると、昇順（▲）・降順（▼）で並べ替えられます。訳文列ソート時は未翻訳の空行が最下部に綺麗にまとまります。</li>
+            <li><strong>ダブルクリック編集 ＆ 幅アシスト:</strong> 行をダブルクリックすると「リアルタイム文字幅計算アシスト」が開き、UI枠からはみ出しにくい文字数を確認しながら手修正できます。</li>
+          </ul>
+        </div>
+
+        <!-- 5. テレメトリ -->
+        <h2 id="detail-telemetry">6. CPU / RAM / GPU / VRAM リアルタイムモニター</h2>
+        <div class="card">
+          <h3>画面最下部のリソース監視ステータスバー</h3>
+          <p>画面右下に常時表示されるハードウェアテレメトリで、PCへの負荷をリアルタイムに把握できます：</p>
+          <table>
+            <thead>
+              <tr>
+                <th>表示アイコン</th>
+                <th>計測内容</th>
+                <th>状態カラーの目安</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>💻 CPU</strong></td>
+                <td>全体のCPU使用率</td>
+                <td rowspan="4">
+                  <span class="badge badge-blue">&lt; 75%: 通常</span><br>
+                  <span class="badge badge-amber">75〜89%: 高負荷</span><br>
+                  <span class="badge badge-red">&gt;= 90%: 警告（メモリ溢れ注意）</span>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>🧠 RAM</strong></td>
+                <td>メインメモリ使用率 ＆ 使用量 (GB)</td>
+              </tr>
+              <tr>
+                <td><strong>🎮 GPU</strong></td>
+                <td>グラフィックボード推論・3D稼働率</td>
+              </tr>
+              <tr>
+                <td><strong>⚡ VRAM</strong></td>
+                <td>ビデオメモリ使用率 ＆ 実使用量 (GB)</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 0;">※ バックグラウンドの軽量デーモンスレッドで2秒間隔で取得しているため、UIの操作感や文字入力の遅延は一切ありません。</p>
+        </div>
+
+        <!-- 6. アップデート対応 -->
+        <h2 id="detail-update">7. MODの差分更新・継承</h2>
+        <div class="card">
+          <h3>元MODがSteamでアップデートされた時の手順</h3>
+          <p>1. zTranzlator を開き、左リストからそのMODをクリックします。<br>
+          2. <strong>以前あなたが翻訳した内容はすべて「既存継承（青緑）」として自動で引き継がれます。</strong><br>
+          3. アップデートで新しく追加された英語だけが「未翻訳（赤）」として抽出されるため、もう一度「一括AI翻訳」➡「ローカルMOD適用」を押すだけでアップデートが完了します。</p>
+        </div>
+
+        <!-- 7. 配布と公開 -->
+        <h2 id="detail-export">8. 配布ZIP ＆ Steamワークショップ公開ガイド</h2>
+        <div class="card">
+          <h3>1クリック配布パッケージ出力</h3>
+          <p>右下の <strong>［配布用ZIPエクスポート］</strong> を押すと、<code>&lt;MOD名&gt;_JA.zip</code> が生成されます。<br>
+          このZIP内には、Steamワークショップ投稿用の説明文テンプレート <strong><code>WORKSHOP_DESCRIPTION.txt</code></strong> および著作権表記ガイド <strong><code>README_LICENSE.txt</code></strong> が自動同梱されています。</p>
+          <div class="alert alert-info">
+            <div>
+              <strong>📜 公開時のお願い（ライセンス表記）:</strong><br>
+              ワークショップへ公開される際は、元MODへのリンクと、本ツール「zTranzlator by Uni-SJ」のクレジット表記をお願いしております。同梱の <code>WORKSHOP_DESCRIPTION.txt</code> をコピー＆ペーストするだけで、日・英両対応の美しいクレジット付き説明文がそのまま完成します。
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. FAQ -->
+        <h2 id="detail-faq">9. よくある質問 (FAQ)</h2>
+        <div class="card">
+          <h3>Q. ゲーム内で翻訳が反映されない場合のチェックリスト</h3>
+          <p><strong>A.</strong> 以下の3点をご確認ください：<br>
+          1. ゲームの「MOD」画面で、元MODとパッチMOD（<code>_JA</code>）の<strong>両方が有効</strong>になっているか。<br>
+          2. ロード順で、パッチMODが元MODよりも<strong>後（下）</strong>に配置されているか。<br>
+          3. ゲーム内言語が「日本語」に設定されているか。</p>
+
+          <h3 style="margin-top:20px;">Q. ボタン枠から日本語がはみ出してしまう場合は？</h3>
+          <p><strong>A.</strong> MODのボタン幅自体がコード内で固定値（100px等）で指定されている場合、非破壊パッチではボタン自体の物理幅を広げることはできません。該当セルをダブルクリックし、より文字数の短い漢字や略称（例: 「エイム感度」➡「感度」）に短縮して保存してください。</p>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- 4. 詳細版 (Detailed) - English (EN) -->
+      <!-- ======================================================== -->
+      <section id="view-detailed-en" class="view-container">
+        <h1>📚 Full Technical Manual (English)</h1>
+        <p>A comprehensive architectural and user guide covering non-destructive patching, folder structure inheritance, Ollama models, telemetry monitoring, and Workshop publishing.</p>
+
+        <!-- 1. Setup Guide -->
+        <h2 id="detail-setup-en">1. Environment Setup Guide (Python & Ollama Installation)</h2>
+        <div class="card">
+          <h3>Step 1: Install Python 3.10+</h3>
+          <p>zTranzlator is an open-source Python desktop application. If you don't have Python installed on your PC, follow these steps:</p>
+          <ol style="margin-left: 20px; color: var(--text-sub); font-size: 13.5px; line-height: 1.7;">
+            <li>Visit the <a href="https://www.python.org/downloads/" target="_blank" style="color:var(--accent-color); font-weight:600;">Official Python Downloads Page (python.org)</a> and download the latest Windows installer.</li>
+            <li>Run the downloaded installer.</li>
+            <li>
+              <div class="alert alert-warning" style="margin: 8px 0;">
+                <div>
+                  <strong>⚠️ Crucial Requirement (Do not miss this):</strong><br>
+                  On the first installer screen, make sure to check <strong>"Add python.exe to PATH"</strong> at the bottom before clicking Install Now.<br>
+                  ※ If missed, Windows will report "'python' is not recognized as an internal or external command" when running the .bat launcher.
+                </div>
+              </div>
+            </li>
+            <li>Click <strong>［Install Now］</strong> and wait for completion.</li>
+            <li><strong>Automatic Dependencies Setup:</strong> Simply double-click <code>run_zTranzlator.bat</code> inside the zTranzlator folder. On the first launch, it will automatically and securely download required dependencies (CustomTkinter GUI, requests, psutil, etc.). No manual terminal commands required.</li>
+          </ol>
+
+          <h3 style="margin-top: 24px;">Step 2: Install Ollama (Local LLM Runtime Engine)</h3>
+          <p>Ollama provides a local inference server for 100% free, private, offline AI translation:</p>
+          <ol style="margin-left: 20px; color: var(--text-sub); font-size: 13.5px; line-height: 1.7;">
+            <li>Download and install Ollama for Windows from the <a href="https://ollama.com/download" target="_blank" style="color:var(--accent-color); font-weight:600;">Official Ollama Website (ollama.com)</a>.</li>
+            <li>Once installed, check your Windows system tray (bottom-right icons near the clock) for the <strong>Llama / Alpaca icon</strong>. If it's running, Ollama's local inference service (<code>localhost:11434</code>) is ready.</li>
+          </ol>
+
+          <h3 style="margin-top: 24px;">Step 3: Pulling AI Translation Models (2 Methods)</h3>
+          <p>To run translations, you need to download model weights into Ollama:</p>
+          
+          <div style="margin-top: 10px;">
+            <strong style="color:#60a5fa;">【Method A: 1-Click via zTranzlator UI (Recommended)】</strong>
+            <p style="margin-top: 4px; font-size: 13px;">When zTranzlator launches, the QuickStart modal (or Settings ➡ "Download Model") allows you to enter the recommended model (<strong><code>gemma4:e4b</code></strong>) and click download to fetch it automatically in the background.</p>
+          </div>
+
+          <div style="margin-top: 14px;">
+            <strong style="color:#60a5fa;">【Method B: Directly via Command Prompt / PowerShell】</strong>
+            <p style="margin-top: 4px; font-size: 13px;">Open Windows PowerShell or Command Prompt, and run the following command:</p>
+            <div style="background:#0f172a; padding:10px 14px; border-radius:6px; font-family:var(--font-mono); font-size:13px; color:#38bdf8; margin: 8px 0;">
+              ollama run gemma4:e4b
+            </div>
+            <p style="font-size: 12px; color:var(--text-muted);">※ The initial pull takes a few minutes (~6.1GB). Type <code>/bye</code> or close the window once done.</p>
+          </div>
+
+          <h3 style="margin-top: 24px;">Step 4: Google Gemini API Setup (Optional - Cloud AI)</h3>
+          <p>For users without a dedicated GPU or those desiring ultra-fast cloud translation:</p>
+          <ul style="margin-left: 20px; color: var(--text-sub); font-size: 13.5px; line-height: 1.7;">
+            <li>Log into <a href="https://aistudio.google.com/" target="_blank" style="color:var(--accent-color); font-weight:600;">Google AI Studio (aistudio.google.com)</a> with your Google account and click <strong>［Get API key］</strong> to generate a free API key.</li>
+            <li>In zTranzlator, select "Google Gemini" as your translation engine, paste your API key, and click Save.</li>
+          </ul>
+        </div>
+
+        <!-- 2. Concept & Architecture -->
+        <h2 id="detail-philosophy-en">2. Concept & Architecture</h2>
+        <div class="card">
+          <h3>Inspired by Skyrim's "xTranslator": True Zero-Destruction Patching</h3>
+          <p>Traditional mod translations often overwritten original mod files directly. While simple, this broke whenever the original mod updated on Steam, destroying your translations and potentially crashing your game.</p>
+          <p>zTranzlator utilizes Project Zomboid Build 42's official dependency mechanism (<code>require=&lt;MOD_ID&gt;</code>) to output a 100% independent companion patch. The game loads the original mod first, followed by your translation patch overlay.</p>
+        </div>
+
+        <!-- 2. Folder Structure Inheritance -->
+        <h2 id="detail-folder-struct-en">3. Folder Structure Inheritance & Engine Reflection</h2>
+        <div class="card highlight">
+          <h3 style="color:#60a5fa;">"Is the original mod's folder structure faithfully preserved?"</h3>
+          <p><strong>Yes. 100% of the relative path structure is preserved and properly mapped to Build 42's loading specifications.</strong></p>
+          <p>zTranzlator automatically categorizes mod text into 3 core archetypes and generates the corresponding file hierarchy:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Archetype</th>
+                <th>Original Location</th>
+                <th>Output Patch Hierarchy</th>
+                <th>Engine Reflection Mechanism</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Type A<br>(Official Translate)</strong></td>
+                <td><code>media/lua/shared/Translate/EN/...</code><br>or <code>42/media/.../EN/...</code></td>
+                <td><code>42/media/lua/shared/Translate/JP/*.json</code><br><code>42/media/lua/shared/Translate/JA/*.json</code><br>(also mirrored to root <code>media/</code>)</td>
+                <td>Build 42's multilingual loader prioritizes the target language JSONs, seamlessly overriding original English keys.</td>
+              </tr>
+              <tr>
+                <td><strong>Type B<br>(Print Media / Docs)</strong></td>
+                <td><code>media/textures/printMedia/txt/*.txt</code><br>(Newspapers, letters, notes in The Ark, etc.)</td>
+                <td><code>42/media/textures/printMedia/txt/*.txt</code><br><strong>Exact subfolder structure preserved</strong></td>
+                <td>PZ's Virtual File System (VFS) overlays files sharing identical relative paths without editing base files.</td>
+              </tr>
+              <tr>
+                <td><strong>Type C<br>(Hardcoded Lua)</strong></td>
+                <td>Raw strings inside <code>media/lua/client/*.lua</code><br>(UI buttons, ContextMenu, options)</td>
+                <td><code>media/lua/client/zTranz_Hook_〇〇.lua</code><br><code>media/lua/shared/Translate/JP/UI.json</code></td>
+                <td>Directly editing original Lua files causes crashes when mods update. Instead, zTranzlator deploys a pure-ASCII non-destructive hook intercepting <code>getText()</code> calls, eliminating charset encoding errors.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 3. AI Engine -->
+        <h2 id="detail-ai-engine-en">4. Recommended Models & Cloud API Setup</h2>
+        <div class="card">
+          <h3>Recommended Models for RTX 3050 - 4070 GPUs</h3>
+          <p>zTranzlator natively connects to Ollama running locally on your PC. 100% free, private, and offline.</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>VRAM Usage</th>
+                <th>Target GPU</th>
+                <th>Characteristics</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color:#38bdf8;">gemma4:e4b</strong><br>(Tested on RTX3050・Top Pick)</td>
+                <td>~ 6.1 GB</td>
+                <td>RTX 3050 8GB / 3060 / 4060</td>
+                <td>Blazing fast ~0.14s per line with zero thinking overhead. Generates natural, polished Japanese game UI translations.</td>
+              </tr>
+              <tr>
+                <td><strong style="color:#60a5fa;">qwen2.5:7b</strong><br>(High Accuracy Standard)</td>
+                <td>~ 5.5 GB</td>
+                <td>RTX 3060 / 3050 8GB / 4060 / 4070</td>
+                <td>Superb contextual understanding, fluent phrasing, accurate game survival terminology.</td>
+              </tr>
+              <tr>
+                <td><strong>qwen2.5:3b</strong><br>(Ultra Lightweight・Trial)</td>
+                <td>~ 2.5 GB</td>
+                <td>Laptops with &lt; 4GB VRAM</td>
+                <td>Extremely fast (0.06s), but due to small parameter size, translations can be overly literal or unnatural, requiring heavy manual proofreading.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3 style="margin-top: 24px;">🔄 Updating Models & Ollama Application</h3>
+          <p>You can effortlessly maintain Ollama and its downloaded model weights:</p>
+          <ul style="margin-left: 20px; color: var(--text-sub); font-size: 13.5px; line-height: 1.7;">
+            <li><strong>Updating Ollama:</strong> When a new release is available, click the update notification in your Windows system tray, or download the latest installer from ollama.com. Overwriting will never delete your existing downloaded models.</li>
+            <li><strong>Updating AI Models:</strong> Run <code>ollama pull &lt;model_name&gt;</code> (e.g. <code>ollama pull gemma4:e4b</code>) in PowerShell. Ollama checks the registry and downloads only differential layers if updated (or enter the name in zTranzlator Settings ➡ Direct DL).</li>
+            <li><strong>Removing Unused Models:</strong> Free up disk space anytime using <code>ollama rm &lt;model_name&gt;</code> (e.g. <code>ollama rm qwen3.5:9b</code>).</li>
+          </ul>
+        </div>
+
+        <!-- 4. Grid Tools -->
+        <h2 id="detail-grid-tools-en">5. Real-time Search, Sorting & Manual Edit</h2>
+        <div class="card">
+          <h3>In-Mod Search Bar & Filter Options</h3>
+          <ul style="margin-left: 20px; color: var(--text-sub); font-size: 13px;">
+            <li><strong>🔍 Omnibox Search:</strong> Instant real-time filtering across English originals, translations, archetype types, statuses, source file names, and internal keys.</li>
+            <li><strong>Status Filters:</strong> Quick toggle between "Untranslated Only", "AI/Manual Only", "Official Matched", and "⚠️ Overflow Warnings".</li>
+            <li><strong>Column Click Sorting:</strong> Click any header (Original, Translation, Source, Status, File) to sort Ascending (▲) or Descending (▼).</li>
+            <li><strong>Double-Click Editing & Width Warning:</strong> Double-click any row to open the manual editing modal with live character width estimation assist.</li>
+          </ul>
+        </div>
+
+        <!-- 5. Telemetry -->
+        <h2 id="detail-telemetry-en">6. Real-Time Hardware Telemetry Monitor</h2>
+        <div class="card">
+          <h3>Live Resource Monitor in the Status Bar</h3>
+          <p>The bottom status bar continuously reports PC hardware metrics updated every 2 seconds via a non-blocking daemon thread:</p>
+          <ul style="margin-left: 20px; color: var(--text-sub); font-size: 13px;">
+            <li><strong>💻 CPU:</strong> Overall system CPU utilization.</li>
+            <li><strong>🧠 RAM:</strong> RAM usage percentage and consumed volume in GB.</li>
+            <li><strong>🎮 GPU:</strong> Dedicated GPU computing workload.</li>
+            <li><strong>⚡ VRAM:</strong> Video memory utilization and allocated volume in GB.</li>
+          </ul>
+        </div>
+
+        <!-- 6. Diff Updates -->
+        <h2 id="detail-update-en">7. Differential Updates & Automatic Inheritance</h2>
+        <div class="card">
+          <h3>When the Base Mod Updates on Steam</h3>
+          <p>1. Open zTranzlator and click the mod in the list.<br>
+          2. All existing translations you created previously are automatically retained as <strong>"Inherited (Cyan)"</strong>.<br>
+          3. Only newly added English lines are extracted as <strong>"Untranslated (Red)"</strong>. Click "Run Batch AI Translation" and "Apply Mod to Local" to update in seconds.</p>
+        </div>
+
+        <!-- 7. Export -->
+        <h2 id="detail-export-en">8. Exporting ZIP & Steam Workshop Release</h2>
+        <div class="card">
+          <h3>1-Click Distribution Package</h3>
+          <p>Clicking <strong>［Export Mod ZIP］</strong> generates a ready-to-upload package containing <code>WORKSHOP_DESCRIPTION.txt</code> and <code>README_LICENSE.txt</code>.<br>
+          Simply paste the generated description into Steam Workshop to share your translation patch with full author credits.</p>
+        </div>
+
+        <!-- 8. FAQ -->
+        <h2 id="detail-faq-en">9. Frequently Asked Questions (FAQ)</h2>
+        <div class="card">
+          <h3>Q. Translations do not show up in-game.</h3>
+          <p><strong>A.</strong> Verify that:<br>
+          1. Both the base mod and patch mod (<code>_JA</code>) are enabled in PZ's "MODS" menu.<br>
+          2. The patch mod is ordered AFTER (below) the base mod.<br>
+          3. Your in-game display language matches the target language.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // 状態管理: mode ("quick" | "detailed") & lang ("ja" | "en")
+    let currentMode = "quick";
+    let currentLang = "ja";
+
+    function parseHash() {
+      const hash = window.location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+      if (params.has("mode")) {
+        const m = params.get("mode");
+        if (m === "detailed" || m === "detail") currentMode = "detailed";
+        else if (m === "quick") currentMode = "quick";
+      }
+      if (params.has("lang") && ["ja", "en"].includes(params.get("lang"))) {
+        currentLang = params.get("lang");
+      }
+    }
+
+    function updateView() {
+      // 1. ボタンのアクティブ状態
+      document.querySelectorAll("#mode-switcher .segmented-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.mode === currentMode);
+      });
+      document.querySelectorAll("#lang-switcher .segmented-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === currentLang);
+      });
+
+      // 2. ラベルの言語切り替え (トップバー)
+      const isJa = currentLang === "ja";
+      document.querySelector(".txt-quick-label").textContent = isJa ? "簡易版 (Quick)" : "Quick Guide";
+      document.querySelector(".txt-detail-label").textContent = isJa ? "詳細版 (Detailed)" : "Detailed Manual";
+
+      // 3. サイドバーの切り替え
+      document.querySelectorAll(".sidebar-nav-block").forEach(block => {
+        block.style.display = "none";
+      });
+      const targetSidebarId = `sidebar-${currentMode}-${currentLang}`;
+      const targetSidebar = document.getElementById(targetSidebarId);
+      if (targetSidebar) targetSidebar.style.display = "block";
+
+      // 4. メインコンテンツビューの切り替え
+      document.querySelectorAll(".view-container").forEach(view => {
+        view.classList.remove("active");
+      });
+      const targetViewId = `view-${currentMode}-${currentLang}`;
+      const targetView = document.getElementById(targetViewId);
+      if (targetView) targetView.classList.add("active");
+
+      // 5. URLハッシュ更新
+      window.location.hash = `lang=${currentLang}&mode=${currentMode}`;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // イベントリスナー設定
+    document.querySelectorAll("#mode-switcher .segmented-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentMode = btn.dataset.mode;
+        updateView();
+      });
+    });
+
+    document.querySelectorAll("#lang-switcher .segmented-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentLang = btn.dataset.lang;
+        updateView();
+      });
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      parseHash();
+      updateView();
+    });
+
+    window.addEventListener("hashchange", () => {
+      parseHash();
+      updateView();
+    });
+  </script>
+</body>
+</html>

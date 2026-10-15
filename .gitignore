@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# User configurations & API keys (Never commit personal API keys)
+config.json
+
+# Local caches & outputs
+mod_progress_cache.json
+mod_draft_cache.json
+vanilla_dict*.json
+output/
+dist/
+build/
+*.zip
+scratch/
+scan_result_*.json
+translated_*_dict.json
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE / Editor settings
+.vscode/
+.idea/
