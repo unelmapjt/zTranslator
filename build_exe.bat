@@ -1,4 +1,5 @@
 @echo off
+chcp 65001 >nul
 cd /d "%~dp0"
 title zTranzlator - EXE Build Tool
 echo ============================================================
@@ -6,24 +7,28 @@ echo   zTranzlator Standalone EXE Builder
 echo   Project Zomboid Build 42 Translation Tool
 echo ============================================================
 echo.
-echo [1/3] ƒrƒ‹ƒh—pƒ‰ƒCƒuƒ‰ƒŠ‚ğŠm”F’†...
-pip install pyinstaller pillow customtkinter darkdetect
+echo [1/3] ãƒ“ãƒ«ãƒ‰ç”¨ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ç¢ºèªãƒ»ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ä¸­...
+python -m pip install --upgrade pip
+python -m pip install pyinstaller pillow customtkinter darkdetect psutil requests
 echo.
-echo [2/3] zTranzlator.exe ‚ğƒrƒ‹ƒh’† (Modern Single-folder Portable)...
-pyinstaller --noconfirm --onedir --windowed ^
+echo [2/3] zTranzlator.exe ã‚’ãƒ“ãƒ«ãƒ‰ä¸­ (Modern Single-folder Portable)...
+python -m PyInstaller --noconfirm --onedir --windowed ^
     --name "zTranzlator" ^
     --add-data "vanilla_dict.json;." ^
+    --add-data "MANUAL.html;." ^
+    --add-data "README.md;." ^
     --add-data "SPECIFICATION.md;." ^
+    --add-data "preview.png;." ^
     --collect-all customtkinter ^
     app_gui.py
 if %ERRORLEVEL% NEQ 0 (
     echo.
-    echo [Error] ƒrƒ‹ƒh‚É¸”s‚µ‚Ü‚µ‚½B
+    echo [Error] ãƒ“ãƒ«ãƒ‰ã«å¤±æ•—ã—ã¾ã—ãŸã€‚
     pause
     exit /b %ERRORLEVEL%
 )
 echo.
-echo [3/3] ƒrƒ‹ƒhŠ®—¹I
-echo o—ÍƒtƒHƒ‹ƒ_: dist\zTranzlator\zTranzlator.exe
+echo [3/3] ãƒ“ãƒ«ãƒ‰å®Œäº†ï¼
+echo å‡ºåŠ›ãƒ•ã‚©ãƒ«ãƒ€: dist\zTranzlator\zTranzlator.exe
 echo ============================================================
 pause
